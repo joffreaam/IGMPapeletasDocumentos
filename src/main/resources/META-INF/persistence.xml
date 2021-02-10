@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="CNEELECCIONES" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>ec.gob.igm.cne.entidades.TBodega</class>
+    <class>ec.gob.igm.cne.entidades.TCanton</class>
+    <class>ec.gob.igm.cne.entidades.TCircunscripcionCanton</class>
+    <class>ec.gob.igm.cne.entidades.TDignidad</class>
+    <class>ec.gob.igm.cne.entidades.TDignidadXUsuario</class>
+    <class>ec.gob.igm.cne.entidades.TDocumentosPreimpresos</class>
+    <class>ec.gob.igm.cne.entidades.TEstructuraCampo</class>
+    <class>ec.gob.igm.cne.entidades.TEstructuraTipodocVsCampo</class>
+    <class>ec.gob.igm.cne.entidades.TJunta</class>
+    <class>ec.gob.igm.cne.entidades.TListadoDocumentos</class>
+    <class>ec.gob.igm.cne.entidades.TMenu</class>
+    <class>ec.gob.igm.cne.entidades.TOperadores</class>
+    <class>ec.gob.igm.cne.entidades.TOrdenDocumento</class>
+    <class>ec.gob.igm.cne.entidades.TPagina</class>
+    <class>ec.gob.igm.cne.entidades.TPaginaperfil</class>
+    <class>ec.gob.igm.cne.entidades.TParroquia</class>
+    <class>ec.gob.igm.cne.entidades.TPerfil</class>
+    <class>ec.gob.igm.cne.entidades.TPrensas</class>
+    <class>ec.gob.igm.cne.entidades.TProduccionDisenio</class>
+    <class>ec.gob.igm.cne.entidades.TProduccionDisenioPreim</class>
+    <class>ec.gob.igm.cne.entidades.TProduccionDocumentos</class>
+    <class>ec.gob.igm.cne.entidades.TProduccionPapeletas</class>
+    <class>ec.gob.igm.cne.entidades.TProduccionPreimpresos</class>
+    <class>ec.gob.igm.cne.entidades.TProvincia</class>
+    <class>ec.gob.igm.cne.entidades.TTipoDocumento</class>
+    <class>ec.gob.igm.cne.entidades.TTipoEstructura</class>
+    <class>ec.gob.igm.cne.entidades.TTipodocumentoVsListado</class>
+    <class>ec.gob.igm.cne.entidades.TUsuario</class>
+    <class>ec.gob.igm.cne.entidades.TUsuarios</class>
+    <class>ec.gob.igm.cne.entidades.TZona</class>
+    <class>ec.gob.igm.cne.entidades.TDocumentoReimpresos</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@192.168.1.80:1521:IGM1"/>
+      <!--  <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@192.168.35.88:1521:GEO"/>-->
+      <property name="javax.persistence.jdbc.user" value="CNEELECCIONES"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="ELECCIONES2020!"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>

@@ -1,0 +1,19 @@
+1-Actualizar T_BASE luego de imprimir etiqueta (para Generacion y Reimpresion)
+
+2-Obtener los codigos de seguridad de las Actas y usarlos en la validación de documentos, campo CODIGO DE SEGURIDAD
+
+3-Las posibles razones para reimpresion de etiquetas deberían definirse, de preferencia leerse de la DB
+
+4-Prueba de impresion de etiquetas para procesos de 2 fases: Ecrutinio y Sufragio.
+En la DB deben existir los respectivos documentos: sobre día del sufragio y sobre día del escrutinio
+
+
+	DIGNIDADES ELECCIONES SECCIONALES
+4-ALCALDESA / ALCALDE
+2-PREFECTA / PREFECTO
+5-CONCEJALES URBANOS
+3-CONCEJALES RURALES
+6-VOCALES DE JUNTA PARROQUIAL RURAL
+7-CONSEJO DE PARTICIPACION CIUDADANA Y CONTROL SOCIAL MUJERES
+8-CONSEJO DE PARTICIPACION CIUDADANA Y CONTROL SOCIAL HOMBRES
+9-CONSEJO DE PARTICIPACION CIUDADANA Y CONTROL SOCIAL ETNIAS Y EXTERIOR
