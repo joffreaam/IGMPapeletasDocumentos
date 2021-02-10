@@ -3,7 +3,7 @@ package ec.gob.igm.cne.vista;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import ec.gob.igm.cne.vista.IMenu;
-import java.io.File;
+//import java.io.File;
 
 /**
  * Vista principal del Menu
