@@ -68,52 +68,41 @@ private TProvinciaDAO provinciaDAO;
         provinciaDAO = new TProvinciaDAO();
 
         setTitle("Generación de Actas de Papeletas por rango de Lotes");
-
-//        List<TProvincia> listaProvincias = provinciaDAO.listarProvinciasXEstadoYTipoDeLote(ESTADO, TIPO);
-//        String[] arrayProvincias = new String[listaProvincias.size()];
-//        for (int i = 0; i < arrayProvincias.length; i++) {
-//            arrayProvincias[i] = listaProvincias.get(i).toString();
-//        }
-//        cmbProvincia.setModel(new DefaultComboBoxModel(arrayProvincias));
-
-//        if (arrayProvincias.length > 0) {
-//            cmbProvincia.setSelectedItem(null);
-//            spnDesde.setEnabled(false);
-//            spnHasta.setEnabled(false);
-//            if (cmbProvincia.getSelectedItem().toString().contains("ecuador".toUpperCase())) {
+////
+//        cmbProvincia.addItemListener(new ItemListener() {
+//            @Override
+//            public void itemStateChanged(ItemEvent e) {
+//                if (e.getStateChange() == ItemEvent.SELECTED) {
+//                    Object item = e.getItem();
+//                    if (item != null) {                        
+//                        //String idProvinciaStr = item.toString().split("-")[0];
+//                        //int idProvincia = Integer.parseInt(idProvinciaStr);
+//                        Item provinciaSeleccionada = (Item)cmbProvincia.getSelectedItem();
+//                        int idProvincia = provinciaSeleccionada.getId();
+//                        
+//                        List<BigDecimal> listaLotes = provinciaDAO.listarLotesXEstadoTipoYProvincia(idProvincia, TIPO, ESTADO,ESTADO2);
+//                        if (listaLotes != null && listaLotes.size() > 0) {
+//                            if (!spnDesde.isEnabled()) {
+//                                spnDesde.setEnabled(true);
+//                            }
+//                            if (!spnHasta.isEnabled()) {
+//                                spnHasta.setEnabled(true);
+//                            }
+//                            SpinnerListModel spinnerModelDesde = new SpinnerListModel(listaLotes);
+//                            SpinnerListModel spinnerModelHasta = new SpinnerListModel(listaLotes);
+//                            // facilita para la impresion desde el ultimo lote generado
+//                            spnHasta.setModel(spinnerModelDesde); //spnDesde.setModel(spinnerModelDesde);
+//                            spnHasta.setModel(spinnerModelHasta);
+//                            setSpinnerNonEditable(spnDesde);
+//                            setSpinnerNonEditable(spnHasta);
+//                        } else {
+//                            spnDesde.setEnabled(false);
+//                            spnHasta.setEnabled(false);
+//                        }
+//                    }
+//                }
 //            }
-//        }
-
-        cmbProvincia.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    Object item = e.getItem();
-                    if (item != null) {
-                        String idProvinciaStr = item.toString().split("-")[0];
-                        int idProvincia = Integer.parseInt(idProvinciaStr);
-                        List<BigDecimal> listaLotes = provinciaDAO.listarLotesXEstadoTipoYProvincia(idProvincia, TIPO, ESTADO);
-                        if (listaLotes != null && listaLotes.size() > 0) {
-                            if (!spnDesde.isEnabled()) {
-                                spnDesde.setEnabled(true);
-                            }
-                            if (!spnHasta.isEnabled()) {
-                                spnHasta.setEnabled(true);
-                            }
-                            SpinnerListModel spinnerModelDesde = new SpinnerListModel(listaLotes);
-                            SpinnerListModel spinnerModelHasta = new SpinnerListModel(listaLotes);
-                            spnDesde.setModel(spinnerModelDesde);
-                            spnHasta.setModel(spinnerModelHasta);
-                            setSpinnerNonEditable(spnDesde);
-                            setSpinnerNonEditable(spnHasta);
-                        } else {
-                            spnDesde.setEnabled(false);
-                            spnHasta.setEnabled(false);
-                        }
-                    }
-                }
-            }
-        });
+//        });
 
         dchFecha.setDate(new Date());
     }
@@ -212,6 +201,10 @@ private TProvinciaDAO provinciaDAO;
 
         jLabel5.setLabelFor(txtEncargadoIGM);
         jLabel5.setText("Encargado IGM:");
+
+        txtEncargadoCNE.setText("Ing. Lasso");
+
+        txtEncargadoIGM.setText("Ing. Yacu");
 
         jLabel6.setText("Fecha:");
 
@@ -346,6 +339,27 @@ private TProvinciaDAO provinciaDAO;
 
     private void cmbProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProvinciaActionPerformed
         // TODO add your handling code here:
+        //List<BigDecimal> listaLotes = cargarLotesXEstadoTipoYProvincia(cmbProvincia);
+//        if (listaLotes != null && listaLotes.size() > 0) {
+//            if (!spnDesde.isEnabled()) {
+//                spnDesde.setEnabled(true);
+//            }
+//            if (!spnHasta.isEnabled()) {
+//                spnHasta.setEnabled(true);
+//            }
+//            SpinnerListModel spinnerModelDesde = new SpinnerListModel(listaLotes);
+//            SpinnerListModel spinnerModelHasta = new SpinnerListModel(listaLotes);
+//            spnDesde.setModel(spinnerModelDesde);
+//            spnHasta.setModel(spinnerModelHasta);
+//            setSpinnerNonEditable(spnDesde);
+//            setSpinnerNonEditable(spnHasta);
+//        } else {
+//            spnDesde.setEnabled(false);
+//            spnHasta.setEnabled(false);
+//        }
+
+
+// TODO add your handling code here:
         List<BigDecimal> listaLotes = cargarLotesXEstadoTipoYProvincia(cmbProvincia);
         if (listaLotes != null && listaLotes.size() > 0) {
             if (!spnDesde.isEnabled()) {
@@ -364,6 +378,7 @@ private TProvinciaDAO provinciaDAO;
             spnDesde.setEnabled(false);
             spnHasta.setEnabled(false);
         }
+
     }//GEN-LAST:event_cmbProvinciaActionPerformed
  
     
@@ -392,6 +407,8 @@ private TProvinciaDAO provinciaDAO;
         setSpinnerNonEditable(spnHasta);
 
         return this.lstLotes;
+        
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

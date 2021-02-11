@@ -25,7 +25,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class ReportGenarator {
 
     public static String ACTAS_PAPELETAS = "PapeletaElectoral.jrxml";
-    public static String ACTAS_DOCUMENTOS = "DocumentoElectoral.jrxml";
+    public static String ACTAS_DOCUMENTOS = "DocumentoElectoral_1_5_4.jrxml";
 
     public JasperPrint genarateReport(String reportName, Map<String, Object> map) throws JRException, SQLException {
 
@@ -34,8 +34,6 @@ public class ReportGenarator {
          //   JasperPrint jpPrint = JasperFillManager.fillReport(jasperReport, map, new JREmptyDataSource());
            Connection  connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.80:1521:IGM1","CNEELECCIONES","ELECCIONES2020!");
             JasperPrint jpPrint = JasperFillManager.fillReport(jasperReport, map, connection);
-            
-            
             
            // JasperViewer.viewReport(jpPrint, false);
             return jpPrint;

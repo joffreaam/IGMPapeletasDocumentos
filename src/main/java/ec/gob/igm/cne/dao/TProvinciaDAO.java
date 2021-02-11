@@ -51,11 +51,11 @@ public class TProvinciaDAO {
     }
 
     public List<BigDecimal> listarLotesXEstadoTipoYProvincia(int idProvincia, String tipo, String estado) {
-        String query = "select id_lote from "+NOMBRE_T_LOTE
-                + " where estado = ? "
-                + "and tipo = ? "
-                + "and id_provincia = ? "
-                + "order by id_lote";
+        String query = "SELECT ID_LOTE FROM " + NOMBRE_T_LOTE
+                + " WHERE ESTADO = ?1 "
+                + " AND TIPO = ?2 "
+                + " AND ID_PROVINCIA = ?3 "
+                + " ORDER BY ID_LOTE";
         Query nativeQuery = jpaController.getEntityManager().createNativeQuery(query);
         nativeQuery.setParameter(1, estado);
         nativeQuery.setParameter(2, tipo);

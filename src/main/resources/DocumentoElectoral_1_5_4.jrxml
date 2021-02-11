@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteDignidades" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b6a8d5cb-369c-41d0-aa0d-25949a7aacda">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteDignidades" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b6a8d5cb-369c-41d0-aa0d-25949a7aacda">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexion_oracle"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IGMELECCIONES"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="300"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="689"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="578"/>
@@ -27,15 +27,22 @@
 	"T_LOTE"."ID_BODEGA"
 FROM "T_BASE", "T_LOTE"
 WHERE   (T_LOTE.ID_LOTE = T_BASE.ID_LOTE)AND (T_LOTE.ID_PROVINCIA = T_BASE.ID_PROVINCIA) AND
-				T_BASE.TIPO= 'DOCUMENTO' AND T_BASE.ID_PROVINCIA =  $P{ID_PROVINCIA}  AND  T_BASE.ID_DIGNIDAD =  $P{ID_DIGNIDAD} AND T_BASE.ID_LOTE IS NOT NULL
-			   AND (T_BASE.ID_LOTE >= $P{LOTE_MIN}  AND T_BASE.ID_LOTE <= $P{LOTE_MAX} )
-ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
+				T_BASE.TIPO= 'DOCUMENTO' AND T_BASE.ID_PROVINCIA =  $P{ID_PROVINCIA}  AND T_BASE.ID_LOTE IS NOT NULL
+			   AND (T_BASE.ID_LOTE >= $P{LOTE_MIN}  AND T_BASE.ID_LOTE <= $P{LOTE_MAX} )  AND  T_LOTE.ESTADO NOT IN ('ABIERTO') 
+			  and  T_BASE.TIPO=T_LOTE.TIPO
+ORDER BY id_provincia, cod_circunscripcion,id_canton, id_parroquia, id_zona, id_junta, sexo_numero]]>
 	</queryString>
 	<field name="PROVINCIA" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="PROVINCIA"/>
 	</field>
+	<field name="ID_PROVINCIA" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="ID_PROVINCIA"/>
+	</field>
 	<field name="CANTON" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="CANTON"/>
+	</field>
+	<field name="ID_LOTE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="ID_LOTE"/>
 	</field>
 	<field name="PARROQUIA" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="PARROQUIA"/>
@@ -46,41 +53,42 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 	<field name="TIPO" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="TIPO"/>
 	</field>
+	<field name="COD_CIRCUNSCRIPCION" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="COD_CIRCUNSCRIPCION"/>
+	</field>
+	<field name="ID_JUNTA" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="ID_JUNTA"/>
+	</field>
 	<field name="TOTAL_PAPELETAS" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.label" value="TOTAL_PAPELETAS"/>
 	</field>
 	<field name="DIGNIDAD" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="DIGNIDAD"/>
 	</field>
-	<field name="ID_JUNTA" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="ID_JUNTA"/>
+	<field name="ID_DIGNIDAD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ID_DIGNIDAD"/>
 	</field>
 	<field name="SEXO" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="SEXO"/>
 	</field>
-	<field name="ID_LOTE" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="ID_LOTE"/>
-	</field>
-	<field name="SEXO_NUMERO" class="java.lang.Integer">
+	<field name="SEXO_NUMERO" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.label" value="SEXO_NUMERO"/>
 	</field>
-	<field name="COD_CIRCUNSCRIPCION" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="COD_CIRCUNSCRIPCION"/>
-	</field>
-	<field name="ID_BODEGA" class="java.lang.Integer">
+	<field name="ID_BODEGA" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.label" value="ID_BODEGA"/>
 	</field>
 	<variable name="ID_LOTE1" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
 		<variableExpression><![CDATA[$F{ID_LOTE}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_PAPELETAS1" class="java.math.BigDecimal" resetType="Group" resetGroup="Group1" calculation="Sum">
+	<variable name="TOTAL_PAPELETAS1" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{TOTAL_PAPELETAS}]]></variableExpression>
 	</variable>
 	<variable name="PROVINCIA1" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
 		<variableExpression><![CDATA[$F{PROVINCIA}]]></variableExpression>
 	</variable>
 	<variable name="SEXO1" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
-		<variableExpression><![CDATA[$F{SEXO_NUMERO}.equals(1)?0:$V{SEXO_M}]]></variableExpression>
+		<variableExpression><![CDATA[$F{SEXO}.equals( "M" )?0:$V{SEXO_M}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
 	<variable name="SEXO_M" class="java.lang.Integer" incrementType="Group" incrementGroup="Group1" calculation="Sum">
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
@@ -91,40 +99,74 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 	<variable name="SEXO_F1" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
 		<variableExpression><![CDATA[$F{SEXO}.equals( "F" )?0:$V{SEXO_F}]]></variableExpression>
 	</variable>
+	<variable name="CONTADOR" class="java.lang.Integer" resetType="Group" resetGroup="Group1">
+		<variableExpression><![CDATA[$V{PROVINCIA1}-$V{SEXO_F1}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="Variable_1" class="java.lang.Integer" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTAL_PAPELETAS}]]></variableExpression>
+	</variable>
+	<variable name="Variable_2" class="java.lang.String">
+		<variableExpression><![CDATA[new String(" ")]]></variableExpression>
+	</variable>
+	<variable name="TotalGeneral" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTAL_PAPELETAS}]]></variableExpression>
+	</variable>
+	<variable name="totalJunta" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{ID_JUNTA}]]></variableExpression>
+	</variable>
 	<group name="Group1">
 		<groupExpression><![CDATA[$F{ID_LOTE}]]></groupExpression>
 		<groupHeader>
-			<band height="42">
+			<band height="48">
 				<staticText>
-					<reportElement mode="Opaque" x="498" y="0" width="23" height="20" backcolor="#C2CFCB" uuid="a590a66f-de20-481e-801c-94cf817da383"/>
+					<reportElement mode="Opaque" x="498" y="0" width="23" height="20" backcolor="#FFFFFF" uuid="a590a66f-de20-481e-801c-94cf817da383"/>
+					<box topPadding="1" bottomPadding="1">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textElement textAlignment="Center">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[-]]></text>
 				</staticText>
 				<textField>
-					<reportElement mode="Opaque" x="42" y="0" width="358" height="20" backcolor="#C2CFCB" uuid="fff6d893-2d3e-475c-9ae5-6e4eab8930e0"/>
+					<reportElement mode="Opaque" x="42" y="0" width="358" height="20" backcolor="#FFFFFF" uuid="fff6d893-2d3e-475c-9ae5-6e4eab8930e0"/>
+					<box topPadding="1" bottomPadding="1">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{ID_LOTE}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="-8" y="0" width="50" height="20" backcolor="#C2CFCB" uuid="07c1eb1b-926f-40b7-bbdd-1306b4053a3f"/>
+					<reportElement mode="Opaque" x="-8" y="0" width="50" height="20" backcolor="#FFFFFF" uuid="07c1eb1b-926f-40b7-bbdd-1306b4053a3f"/>
+					<box topPadding="1" bottomPadding="1">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[LOTE :]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="-8" y="21" width="121" height="20" backcolor="#9A9EA1" uuid="2c5d45d0-173c-4a08-ae13-e2e84051edee">
+					<reportElement mode="Opaque" x="42" y="20" width="78" height="20" backcolor="#FFFFFF" uuid="2c5d45d0-173c-4a08-ae13-e2e84051edee">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
 					</reportElement>
 					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
 						<pen lineWidth="0.0"/>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement verticalAlignment="Middle">
@@ -133,14 +175,14 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 					<text><![CDATA[PROVINCIA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="" mode="Opaque" x="113" y="21" width="80" height="20" backcolor="#9A9EA1" uuid="6886344b-3dde-456b-b777-2af2fcff138b">
+					<reportElement key="" mode="Opaque" x="120" y="20" width="80" height="20" backcolor="#FFFFFF" uuid="6886344b-3dde-456b-b777-2af2fcff138b">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
 					</reportElement>
 					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
 						<pen lineWidth="0.0"/>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement verticalAlignment="Middle">
@@ -149,14 +191,14 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 					<text><![CDATA[CANTON]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="193" y="21" width="102" height="20" backcolor="#9A9EA1" uuid="30788a2a-7d1a-4d2f-831f-488261d88988">
+					<reportElement mode="Opaque" x="200" y="20" width="102" height="20" backcolor="#FFFFFF" uuid="30788a2a-7d1a-4d2f-831f-488261d88988">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
 					</reportElement>
 					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
 						<pen lineWidth="0.0"/>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement verticalAlignment="Middle">
@@ -165,14 +207,14 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 					<text><![CDATA[PARROQUIA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="345" y="21" width="88" height="20" backcolor="#9A9EA1" uuid="647a9d88-0ad1-4fbd-a080-da7da1ef03ab">
+					<reportElement mode="Opaque" x="342" y="20" width="88" height="20" backcolor="#FFFFFF" uuid="647a9d88-0ad1-4fbd-a080-da7da1ef03ab">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
 					</reportElement>
 					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
 						<pen lineWidth="0.0"/>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
@@ -181,14 +223,14 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 					<text><![CDATA[ZONA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="295" y="21" width="50" height="20" backcolor="#9A9EA1" uuid="13dc9b8e-30ec-4676-9a8c-0d48e0a973f5">
+					<reportElement mode="Opaque" x="302" y="20" width="40" height="20" backcolor="#FFFFFF" uuid="13dc9b8e-30ec-4676-9a8c-0d48e0a973f5">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
 					</reportElement>
 					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
 						<pen lineWidth="0.0"/>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -197,14 +239,14 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 					<text><![CDATA[CIR]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="433" y="21" width="38" height="20" backcolor="#9A9EA1" uuid="16c0c9c2-7529-4157-a04a-115806e8b8fd">
+					<reportElement mode="Opaque" x="430" y="20" width="38" height="20" backcolor="#FFFFFF" uuid="16c0c9c2-7529-4157-a04a-115806e8b8fd">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
 					</reportElement>
 					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
 						<pen lineWidth="0.0"/>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -213,14 +255,14 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 					<text><![CDATA[JUNTA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="471" y="21" width="30" height="20" backcolor="#9A9EA1" uuid="be41807c-577f-4f2e-a7a2-f2d1ca1ccde7">
+					<reportElement mode="Opaque" x="468" y="20" width="33" height="20" backcolor="#FFFFFF" uuid="be41807c-577f-4f2e-a7a2-f2d1ca1ccde7">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
 					</reportElement>
 					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
 						<pen lineWidth="0.0"/>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -228,61 +270,74 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 					</textElement>
 					<text><![CDATA[SEXO]]></text>
 				</staticText>
-				<staticText>
-					<reportElement mode="Opaque" x="501" y="21" width="59" height="20" backcolor="#9A9EA1" uuid="f1de2cc3-2ee7-40d5-94a0-30766d0da85b">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
-					</reportElement>
-					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				<textField>
+					<reportElement mode="Opaque" x="471" y="0" width="30" height="20" backcolor="#FFFFFF" uuid="ca9ea67f-73cb-463a-a4d3-ad8172f3f4ab"/>
+					<box topPadding="1" bottomPadding="1">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement verticalAlignment="Middle">
-						<font size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[DOCUMENTOS]]></text>
-				</staticText>
-				<textField>
-					<reportElement mode="Opaque" x="471" y="0" width="30" height="20" backcolor="#C2CFCB" uuid="ca9ea67f-73cb-463a-a4d3-ad8172f3f4ab"/>
 					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{ID_LOTE}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement mode="Opaque" x="520" y="0" width="40" height="20" backcolor="#C2CFCB" uuid="7ef7b4d2-4144-45a5-875f-0f257fbaf41a"/>
+					<reportElement mode="Opaque" x="520" y="0" width="33" height="20" backcolor="#FFFFFF" uuid="7ef7b4d2-4144-45a5-875f-0f257fbaf41a"/>
+					<box topPadding="1" bottomPadding="1">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textElement textAlignment="Left">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{LOTE_MAX}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="400" y="0" width="80" height="20" backcolor="#C2CFCB" uuid="da159fbc-a8a5-4782-9118-675015ab9a8c"/>
+					<reportElement mode="Opaque" x="400" y="0" width="80" height="20" backcolor="#FFFFFF" uuid="da159fbc-a8a5-4782-9118-675015ab9a8c"/>
+					<box topPadding="1" bottomPadding="1">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[Registro :]]></text>
 				</staticText>
+				<line>
+					<reportElement x="-10" y="-2" width="565" height="1" uuid="bb8713f4-b968-49ab-ac71-327dbf6fdd2a"/>
+				</line>
+				<line>
+					<reportElement x="-7" y="20" width="561" height="1" uuid="38873691-dd29-4fe7-908e-3b64b8445d78"/>
+				</line>
+				<line>
+					<reportElement x="-8" y="43" width="561" height="1" uuid="e2c6efdc-616f-4072-be29-39212a8c04e5"/>
+				</line>
+				<staticText>
+					<reportElement mode="Opaque" x="-1" y="21" width="31" height="20" backcolor="#FFFFFF" uuid="f342dfb1-ac1c-4f2d-95e1-25ff40439ce6">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
+					</reportElement>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[LOTE]]></text>
+				</staticText>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="75">
-				<textField>
-					<reportElement x="170" y="55" width="60" height="16" uuid="70593741-cb09-4254-b45d-be9966fd7c23"/>
-					<textElement textAlignment="Right">
-						<font size="11" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{TOTAL_PAPELETAS1}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement mode="Opaque" x="-7" y="55" width="177" height="16" backcolor="#FFFFFF" uuid="64641551-aea7-4495-b0f7-1572ff0f42e1"/>
-					<textElement>
-						<font size="10" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Total de Papeletas:]]></text>
-				</staticText>
+			<band height="78">
 				<staticText>
 					<reportElement mode="Opaque" x="-7" y="39" width="177" height="16" backcolor="#FFFFFF" uuid="e1052da6-8d86-4a31-b610-67cc9606fbf3"/>
 					<textElement>
@@ -305,10 +360,10 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 					<text><![CDATA[Total de Paquetes JRV's Masculino:]]></text>
 				</staticText>
 				<line>
-					<reportElement x="-3" y="6" width="561" height="1" uuid="f486420f-84de-48ef-9d69-6101586f4edf"/>
+					<reportElement x="-10" y="6" width="561" height="1" uuid="f486420f-84de-48ef-9d69-6101586f4edf"/>
 				</line>
 				<line>
-					<reportElement x="-3" y="70" width="561" height="1" uuid="769f417f-1ce1-4046-96bc-8c752f5b9171"/>
+					<reportElement x="-10" y="70" width="561" height="1" uuid="769f417f-1ce1-4046-96bc-8c752f5b9171"/>
 				</line>
 				<textField>
 					<reportElement x="170" y="40" width="60" height="16" uuid="4ceb05f0-784e-46e9-b2f2-a0807502af49"/>
@@ -318,18 +373,18 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 					<textFieldExpression><![CDATA[$V{PROVINCIA1}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="171" y="6" width="59" height="17" uuid="1adbcc78-52e6-4904-8e19-51c7a8e3fa4b"/>
-					<textElement textAlignment="Right">
-						<font size="11" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{SEXO1}]]></textFieldExpression>
-				</textField>
-				<textField>
 					<reportElement x="171" y="23" width="59" height="16" uuid="d773d000-6bee-4b84-b085-fcd5ca0cd1be"/>
 					<textElement textAlignment="Right">
 						<font size="11" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{SEXO_F1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="170" y="6" width="60" height="17" uuid="e04a80c8-5b87-42f6-97c7-b11cd5ebb461"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{CONTADOR}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -338,141 +393,132 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="4" splitType="Stretch"/>
-	</title>
-	<pageHeader>
-		<band height="160" splitType="Stretch">
+		<band height="142" splitType="Stretch">
 			<staticText>
-				<reportElement x="-6" y="70" width="84" height="24" uuid="c2af0280-8936-4aa1-9fb6-d827b1133127"/>
+				<reportElement x="-6" y="111" width="551" height="31" uuid="033cb377-6333-45e5-ae0d-379848a18e8c"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[DIGNIDAD:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="78" y="70" width="260" height="24" uuid="f8d28bf4-36f5-4962-ba10-f6e3f2a8aa91"/>
-				<textElement markup="none">
-					<font size="14" isBold="true"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{DIGNIDAD}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="-6" y="111" width="551" height="31" uuid="acdaa43b-7480-47d5-868e-a6a6411d5f31"/>
 				<text><![CDATA[En la ciudad de Quito al                               , el IGM realiza la entrega a conformidad del CNE y de la empresa integradora, lo siguiente:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="551" height="39" uuid="b8fe5f4e-0a5c-4e4b-aced-74345731efe0"/>
+				<reportElement x="0" y="0" width="551" height="39" uuid="45ffe97d-f97a-4f83-8739-9433fbc6c9cd"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[DOCUMENTO DE CONSTATACIÓN DE ENTREGA RECEPCIÓN DE DOCUMENTOS ELECTORALES]]></text>
+				<text><![CDATA[DOCUMENTO DE CONSTATACIÓN DE ENTREGA RECEPCIÓN DE DOCUMENTOS ELECTORALES ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-6" y="41" width="76" height="14" uuid="c2d90ea2-3aae-44a7-b4ba-f4c2f1476c89"/>
+				<reportElement x="-6" y="41" width="76" height="14" uuid="73aad114-9430-4d8f-b779-ab16e7692685"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha de Reporte:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-6" y="55" width="76" height="14" uuid="b6c55c58-a542-48d4-9326-4302dfdbe5b8"/>
+				<reportElement x="-6" y="55" width="76" height="14" uuid="0e51a381-4d5f-4f04-bf17-83add8122222"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha de Entrega:]]></text>
 			</staticText>
 			<textField pattern="M/d/yyyy">
-				<reportElement x="70" y="42" width="100" height="12" uuid="a4e4e899-15e9-4c3f-a6f4-06604dbb0227"/>
+				<reportElement x="70" y="42" width="100" height="12" uuid="4e838a6c-aba2-4fab-b4df-a4b10044b4f8"/>
 				<textElement>
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField pattern="HH:mm:ss">
-				<reportElement x="171" y="42" width="100" height="12" uuid="d96d6a9a-e5a9-4a1b-b561-ce287152ab59"/>
+				<reportElement x="171" y="42" width="100" height="12" uuid="8018bf5b-0d02-4f07-9818-2ab61c7a0c79"/>
 				<textElement>
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="420" y="42" width="48" height="12" uuid="9bf77184-0243-4cc2-aafd-e2f297080853"/>
+				<reportElement x="420" y="42" width="48" height="12" uuid="2cecac7b-8565-4a3d-b5df-c6e506a6fdc6"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[LOTE No:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="471" y="42" width="28" height="12" uuid="c6bd2c43-47ac-40e8-b54c-fab03412754d"/>
+				<reportElement x="471" y="42" width="28" height="12" uuid="58b8a386-d674-4976-a0ff-7b0955a35b85"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{LOTE_MIN}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="501" y="42" width="20" height="12" uuid="5813b305-275e-4b4d-8056-f1d7426635e3"/>
+				<reportElement x="501" y="42" width="20" height="12" uuid="0c462911-701d-46dd-959a-143b1dfe07cb"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[al]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="523" y="42" width="32" height="12" uuid="96174eec-6441-45b9-a9f7-0d946e5c0781"/>
+				<reportElement x="523" y="42" width="32" height="12" uuid="3934b8ec-d7c9-4f87-9dfa-8cd4fc0008b4"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{LOTE_MAX}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-6" y="90" width="136" height="20" uuid="d18a4afb-4f55-4e58-9801-a7f6d6725789"/>
+				<reportElement x="-6" y="90" width="136" height="20" uuid="36cf980a-908c-4022-a3fd-64c1172b71d5"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Despacho Bodega No:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="449" y="142" width="55" height="16" uuid="4d2d059e-4f55-4fd3-afcc-84318fb9ba1f"/>
+				<reportElement x="70" y="54" width="110" height="14" uuid="1212f6de-3dad-49eb-ae9e-eb4f3bec7989"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FECHA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="111" width="80" height="19" uuid="493b50f7-746d-455c-b13e-63e7b4f116a7"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FECHA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="90" width="50" height="20" uuid="5a06cc35-2e79-4cf7-a093-942ae98fa8c4"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_BODEGA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="447" y="2" width="55" height="16" uuid="512c9932-5aa0-4c6c-abc5-866ecc1a0d1e"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Pag. " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="505" y="142" width="50" height="16" uuid="4834516c-1f77-4637-ab2c-aaac6b8f0554"/>
+				<reportElement x="502" y="2" width="50" height="16" uuid="2cdc45b4-b3d5-4a53-b1cc-6ba7ef8cd75e"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Left">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="70" y="54" width="110" height="14" uuid="c9c7c156-8710-4cfd-a7ab-447f67168d9f"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{FECHA}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="100" y="111" width="80" height="19" uuid="dc0b2587-c034-495b-ba9c-75f00ff2398c"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$P{FECHA}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="130" y="90" width="50" height="20" uuid="6d752b6d-0ff6-4409-939d-15e42a37258d"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{ID_BODEGA}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -493,9 +539,9 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="13" splitType="Stretch">
+		<band height="18" splitType="Stretch">
 			<textField>
-				<reportElement x="-8" y="0" width="119" height="13" uuid="558d7f12-c213-48cd-8ce0-7a289e5e0002">
+				<reportElement x="42" y="0" width="78" height="13" uuid="558d7f12-c213-48cd-8ce0-7a289e5e0002">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
 				</reportElement>
 				<textElement>
@@ -504,7 +550,7 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 				<textFieldExpression><![CDATA[$F{PROVINCIA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="113" y="0" width="80" height="13" uuid="496caff1-3e1e-41a9-9df4-6320247ce396">
+				<reportElement x="120" y="0" width="80" height="13" uuid="496caff1-3e1e-41a9-9df4-6320247ce396">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ceb6e2f2-812f-4747-bd5f-33ebf1a867e9"/>
 				</reportElement>
 				<textElement>
@@ -513,7 +559,7 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 				<textFieldExpression><![CDATA[$F{CANTON}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="193" y="0" width="102" height="13" uuid="aaf7da03-8906-4f99-8a01-2d2e70ae4ef8">
+				<reportElement x="200" y="0" width="102" height="13" uuid="aaf7da03-8906-4f99-8a01-2d2e70ae4ef8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63ce3cc0-d4ce-444c-a408-8f2864ef4479"/>
 				</reportElement>
 				<textElement>
@@ -522,7 +568,7 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 				<textFieldExpression><![CDATA[$F{PARROQUIA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="0" width="40" height="13" uuid="d4c5d00f-958a-44fc-9481-0c8ec124d507">
+				<reportElement x="430" y="0" width="38" height="13" uuid="d4c5d00f-958a-44fc-9481-0c8ec124d507">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d2dc0028-5ed6-4ac0-acc5-48c0cf1bb9c2"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -531,17 +577,7 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 				<textFieldExpression><![CDATA[$F{ID_JUNTA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="503" y="0" width="57" height="13" uuid="892fa70b-0406-4a6f-abf0-e7c337e08545">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cfa8e94a-026a-45b5-98a4-3e972c936f57"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{TOTAL_PAPELETAS}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="471" y="0" width="32" height="13" uuid="ecd23bb8-27bd-4a18-a011-9e7fa495328b">
+				<reportElement x="468" y="0" width="35" height="13" uuid="ecd23bb8-27bd-4a18-a011-9e7fa495328b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a5dda2e-ae15-4156-8989-9cf76c93d070"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -549,8 +585,8 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{SEXO}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="345" y="0" width="88" height="13" uuid="224f9ea6-a895-4d2e-8549-b1c416157b98">
+			<textField isBlankWhenNull="true">
+				<reportElement x="342" y="0" width="88" height="13" uuid="224f9ea6-a895-4d2e-8549-b1c416157b98">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d47081cc-8ad4-4353-9694-b2a7c7dc91e3"/>
 				</reportElement>
 				<textElement>
@@ -558,8 +594,8 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ZONA}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="296" y="0" width="49" height="13" uuid="738ebd7b-f001-44d3-b17c-e0f11c7d57a0">
+			<textField isBlankWhenNull="true">
+				<reportElement x="302" y="0" width="40" height="13" uuid="738ebd7b-f001-44d3-b17c-e0f11c7d57a0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="37047328-0ee1-4dc7-9879-07b79665598c"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -567,56 +603,72 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{COD_CIRCUNSCRIPCION}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="30" height="13" uuid="4afa5d2b-1294-4d77-9a24-272e644c44de">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="492f751c-9cae-4272-872e-5b5cbf5a953c"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_LOTE}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
 		<band height="7" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="6" splitType="Stretch"/>
+		<band height="31" splitType="Stretch"/>
 	</pageFooter>
+	<lastPageFooter>
+		<band height="50"/>
+	</lastPageFooter>
 	<summary>
-		<band height="225" splitType="Stretch">
+		<band height="254" splitType="Stretch">
 			<staticText>
-				<reportElement x="-3" y="18" width="551" height="20" uuid="c9fb37bb-7eea-4c17-8644-896910e04891"/>
-				<text><![CDATA[Las partes manifiestan su conformidad sobre lo actuado, y suscriben la presente acta en 4 ejemplares.]]></text>
+				<reportElement x="-3" y="27" width="551" height="20" uuid="c9fb37bb-7eea-4c17-8644-896910e04891"/>
+				<text><![CDATA[Las partes manifiestan su conformidad sobre lo actuado, y suscriben la presente acta en 5 ejemplares.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="10" y="77" width="220" height="15" uuid="0886e11d-871d-4eb1-a5e4-07365efb0dfc">
+				<reportElement x="10" y="77" width="260" height="15" uuid="0886e11d-871d-4eb1-a5e4-07365efb0dfc">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{IGM_ENTREGA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="77" width="223" height="15" uuid="5aac295c-da9b-4024-be9e-c6303b594d32">
+				<reportElement x="300" y="77" width="263" height="15" uuid="5aac295c-da9b-4024-be9e-c6303b594d32">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{CNE_RECIBE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="90" y="93" width="60" height="33" uuid="5d7337a9-4fd9-4fcc-9c09-2ac8a944b657"/>
+				<reportElement x="75" y="93" width="130" height="17" uuid="5d7337a9-4fd9-4fcc-9c09-2ac8a944b657"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[IGM ENTREGA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="93" width="60" height="33" uuid="1aeae135-967b-409b-8f61-e2133fce3728"/>
+				<reportElement x="380" y="93" width="100" height="17" uuid="1aeae135-967b-409b-8f61-e2133fce3728"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CNE VALIDA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="170" width="220" height="15" uuid="bb839afd-e7e2-43c0-87cd-3e437a861e9e">
+				<reportElement x="10" y="133" width="220" height="15" uuid="22f6b71c-7e92-4fd0-bff5-c338d19988db">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -625,10 +677,10 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 				<textElement textAlignment="Center">
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[MAYO. PABLO GOMEZ]]></text>
+				<text><![CDATA[Capt. de E.  Christian Barahona]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="303" y="170" width="220" height="15" uuid="0156109e-4c7e-45f3-92b8-2e410db21771">
+				<reportElement x="303" y="133" width="220" height="15" uuid="054fdd65-e7a2-41c7-af8c-3c15138520b6">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -637,44 +689,61 @@ ORDER BY T_BASE.ID_LOTE, T_BASE.CANTON, T_BASE.PARROQUIA, T_BASE.ID_JUNTA]]>
 				<textElement textAlignment="Center">
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[ING. JOSE MONTESINOS]]></text>
+				<text><![CDATA[Ing. Evelyn Suárez]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="90" y="185" width="60" height="13" uuid="8ce796c3-d070-456c-9b36-24b504e511b1">
+				<reportElement x="-8" y="149" width="279" height="39" uuid="ce2b4be0-2b9f-49aa-8838-2f31a3fa92d1">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[MAYO. de E. ]]></text>
+				<text><![CDATA[JEFE DE PROYECTO "PAPELETAS Y DOCUMENTOS ELECTORALES ELECCIONES GENERALES 2021"]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="198" width="220" height="27" uuid="62898014-83df-4573-81ca-4e437ba035cb">
+				<reportElement x="271" y="148" width="289" height="25" uuid="aad41a43-cb12-4072-ac66-50a1fc3e43ca">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[JEFE DE PROYECTO "PAPELETAS Y DOCUMENTOS ELECTORALES IGM"]]></text>
+				<text><![CDATA[DIRECTORA NACIONAL DE LOGISTICA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="358" y="185" width="110" height="13" uuid="776a3ca8-6956-4070-86c6-13a935c90215">
+				<reportElement x="378" y="173" width="71" height="15" uuid="7fafb49a-b22d-4b57-9f6d-fea9c8922d28">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[JEFE DE BODEGAS]]></text>
+				<text><![CDATA[CNE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="378" y="198" width="71" height="27" uuid="7c8d80b0-f77f-48d7-b80f-8b5c675a31e1">
+				<reportElement x="85" y="178" width="71" height="15" uuid="a58b3e4c-7204-4821-aefa-716cab462ce9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IGM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="-3" y="7" width="173" height="16" backcolor="#FFFFFF" uuid="1e31f854-2139-49a9-92cb-93df890d519d"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL JUNTAS:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-5" y="24" width="561" height="1" uuid="496f50d5-cacc-46df-9f66-a960a7c49979"/>
+			</line>
+			<textField>
+				<reportElement x="175" y="0" width="165" height="23" uuid="53f586a7-f14b-4f25-89d1-961064b997a6"/>
+				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[MONTGAR  RECIBE]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$V{totalJunta}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
