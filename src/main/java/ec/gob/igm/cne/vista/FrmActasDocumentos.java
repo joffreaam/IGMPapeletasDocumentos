@@ -39,6 +39,7 @@ import ec.gob.igm.cne.documentos.Item;
 /**
  *
  * @author desarrollo
+ * GITHUb: Test por Joffre A.
  */
 public class FrmActasDocumentos extends javax.swing.JDialog {
 
