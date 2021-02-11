@@ -126,9 +126,8 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.14.0</version>
+            <version>6.16.0</version>
         </dependency>
-
     </dependencies>
     <name>PapeletasDocumentos1.4.3</name>
     <build>

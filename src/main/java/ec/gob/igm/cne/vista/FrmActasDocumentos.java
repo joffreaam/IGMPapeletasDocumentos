@@ -42,7 +42,7 @@ import ec.gob.igm.cne.documentos.Item;
  */
 public class FrmActasDocumentos extends javax.swing.JDialog {
 
-    private TProvinciaDAO provinciaDAO;
+private TProvinciaDAO provinciaDAO;
     private static final String ESTADO2 ="RECIBIDA";
     private static final String ESTADO = "CERRADO";
     private static final String TIPO = "DOCUMENTO";
@@ -55,15 +55,16 @@ public class FrmActasDocumentos extends javax.swing.JDialog {
      */
     public FrmActasDocumentos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.lstProvincias= new ArrayList();
+        
         // Add Joffre A
         this.base=new TBaseDAO();
         this.lstProvincias=new ArrayList();
         this.lstLotes=new ArrayList();
-        cargarProvincia(cmbProvincia);
+        
         ///--------- aca
         
         initComponents();
+        cargarProvincia(cmbProvincia);
         provinciaDAO = new TProvinciaDAO();
 
         setTitle("Generación de Actas de Papeletas por rango de Lotes");
@@ -284,7 +285,7 @@ public class FrmActasDocumentos extends javax.swing.JDialog {
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         System.out.println(dchFecha.getDate().toString());
         
-        String idProvincia;
+        Integer idProvincia;
         int loteMin, loteMax;
         try {
             loteMin = (Integer) spnDesde.getValue();
@@ -298,7 +299,9 @@ public class FrmActasDocumentos extends javax.swing.JDialog {
         String cneRecibe = txtEncargadoCNE.getText();
         // Validaciones
         if (cmbProvincia.getSelectedItem() != null && !igmEntrega.isEmpty() && !cneRecibe.isEmpty() && dchFecha.getDate() != null) {
-            idProvincia = cmbProvincia.getSelectedItem().toString().substring(0, 1);
+            //add Joffre Alava
+            Item provinciaSeleccionada = (Item)cmbProvincia.getSelectedItem();
+            idProvincia = provinciaSeleccionada.getId();
             if (loteMin <= loteMax && loteMin > 0 && loteMax > 0) {                
                 Map<String, Object> params = new HashMap<>();
                 params.put("ID_PROVINCIA", idProvincia);
@@ -362,55 +365,8 @@ public class FrmActasDocumentos extends javax.swing.JDialog {
             spnHasta.setEnabled(false);
         }
     }//GEN-LAST:event_cmbProvinciaActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmActasDocumentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmActasDocumentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmActasDocumentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmActasDocumentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FrmActasDocumentos dialog = new FrmActasDocumentos(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+ 
+    
 
     // Add Joffre Alava
     public void cargarProvincia(JComboBox cmbProvincia) {

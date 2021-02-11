@@ -75,7 +75,7 @@ public class TBaseDAO extends CrudDAO {
 //            Query query = em.createNativeQuery("SELECT B.ID_DIGNIDAD CODIGO, B.ID_DIGNIDAD ||' - '|| B.DIGNIDAD AS DIGNIDAD FROM T_USUARIO A INNER JOIN " 
 //                                              +"T_DIGNIDAD_X_USUARIO B ON A.ID_USUARIO=B.ID_USUARIO WHERE USUARIO=?1");
             
-            Query query = em.createNativeQuery("SELECT COD_DIGNIDAD, COD_DIGNIDAD ||' '|| DIGNIDAD AS DIGNIDAD FROM T_DIGNIDAD ORDER BY COD_DIGNIDAD");
+            Query query = em.createNativeQuery("SELECT COD_DIGNIDAD, COD_DIGNIDAD ||' - '|| DIGNIDAD AS DIGNIDAD FROM T_DIGNIDAD ORDER BY COD_DIGNIDAD");
             //query.setParameter(1, usuario);
             return query.getResultList();
 
@@ -90,7 +90,7 @@ public List<Object[]> cargarProvinciasXEstadoYTipoDeLote(String estado, String t
         try {
 //            Query query = em.createNativeQuery("SELECT B.ID_DIGNIDAD CODIGO, B.ID_DIGNIDAD ||' - '|| B.DIGNIDAD AS DIGNIDAD FROM T_USUARIO A INNER JOIN " 
 //                                              +"T_DIGNIDAD_X_USUARIO B ON A.ID_USUARIO=B.ID_USUARIO WHERE USUARIO=?1");           
-            String sql = "select pro.id_provincia, pro.provincia "
+            String sql = "select pro.id_provincia, pro.id_provincia ||' - '|| pro.provincia "
                 + "from t_provincia pro, T_LOTE lot "
                 + "where PRO.ID_PROVINCIA = lot.id_provincia "
                 + "and (lot.estado = ?1 "
