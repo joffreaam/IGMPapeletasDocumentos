@@ -378,8 +378,8 @@ private TProvinciaDAO provinciaDAO;
         }
     }
     
-    public List<BigDecimal> cargarLotesXEstadoTipoYProvincia(JComboBox cmbProvincia1) {
-        ec.gob.igm.cne.documentos.Item provinciaSeleccionada = (ec.gob.igm.cne.documentos.Item)cmbProvincia1.getSelectedItem();
+    public List<BigDecimal> cargarLotesXEstadoTipoYProvincia(JComboBox cmbProvincia) {
+        Item provinciaSeleccionada = (Item)cmbProvincia.getSelectedItem();
         Integer idProvincia = provinciaSeleccionada.getId();
         provinciaDAO = new TProvinciaDAO();
         
