@@ -205,7 +205,7 @@ private TProvinciaDAO provinciaDAO;
 
         txtEncargadoCNE.setText("Ing. Lasso");
 
-        txtEncargadoIGM.setText("Ing. Yacu");
+        txtEncargadoIGM.setText("Ing. Yaku");
 
         jLabel6.setText("Fecha:");
 
