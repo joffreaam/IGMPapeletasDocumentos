@@ -130,4 +130,24 @@ public class TUsuarioDAO {
         }
         tabla.setModel(model);
     }
+    
+    public TUsuario buscarPorUsuario(String usuario){
+        TUsuario resultado;
+        EntityManager em = ujc.getEntityManager();
+        TypedQuery<TUsuario> consulta = em.createNamedQuery("TUsuario.findByUsuario", TUsuario.class);
+        consulta.setParameter("usuario", usuario);
+        //consulta.setParameter("password", password);
+        List<TUsuario> lista= consulta.getResultList();
+        //String query = "select ";
+        //em.createNativeQuery(usuario, resultClass);
+        if(lista.isEmpty()){
+            resultado = null;            
+        }else{
+            resultado = lista.get(0);
+        }
+        em.close();
+        return resultado;
+    }
+    
+    
 }

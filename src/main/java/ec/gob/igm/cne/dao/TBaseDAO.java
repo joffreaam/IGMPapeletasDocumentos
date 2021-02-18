@@ -212,5 +212,265 @@ public List<Object[]> cargarProvinciasXEstadoYTipoDeLote(String estado, String t
     
     
     ///****** aca
+
+    /**
+     * Carga las provincias
+     * @param intidignidad
+     * @param estado
+     * @return 
+     */
+    public List<Object[]> cargarProvincia(String estado) {
+        try {
+                 
+                    Query query = em.createNativeQuery("SELECT DISTINCT(A.ID_PROVINCIA) CODIGO, A.ID_PROVINCIA ||' - '|| A.PROVINCIA AS PROVINCIA, B.PRELACION FROM T_BASE A, T_PROVINCIA B WHERE A.ID_PROVINCIA=B.ID_PROVINCIA AND A.ESTADO=?1 AND A.TIPO='DOCUMENTO' ORDER BY B.PRELACION");
+                    //query.setParameter(1, intidignidad);
+                    query.setParameter(1, estado);
+                    return query.getResultList();   
+              
+               
+        } catch (Exception ex) {
+            Logger.getLogger(TBaseDAORES.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<Object[]>();
+        }
+    }
+    
+       
+    public List<Object[]> cargarDatosLote(int intidLote,int intidProvincia,String estado) {
+        try {                                        
+            Query query = em.createNativeQuery("SELECT ID_JUNTA,PROVINCIA,CANTON,PARROQUIA,ID_ZONA,ZONA,SEXO,TAG,DIGNIDAD,NOM_CIRCUNSCRIPCION "
+                                              +"FROM T_BASE WHERE ESTADO=?1 AND ID_LOTE=?2 AND ID_PROVINCIA=?3 AND TIPO='DOCUMENTO' "
+                                              +" ORDER BY ID_PROVINCIA DESC ,ID_CANTON DESC,COD_CIRCUNSCRIPCION DESC,ID_PARROQUIA DESC,ID_ZONA DESC,SEXO DESC,ID_JUNTA DESC"
+                                              );
+            
+            query.setParameter(1, estado);
+            query.setParameter(2, intidLote);
+            query.setParameter(3, intidProvincia);
+            return query.getResultList();
+
+        } catch (Exception ex) {
+            Logger.getLogger(TBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<Object[]>();
+        }
+    }
    
+    
+    /**
+     * Carga los datos de la etiqueta
+     * @param tag
+     * @return 
+     */
+    public List<Object[]> cargarDatosTag(String tag) {
+        try {
+            Query query = em.createNativeQuery("SELECT ID_PROVINCIA,PROVINCIA,ID_CANTON, CANTON,ID_PARROQUIA, PARROQUIA, "
+                                              +"ID_ZONA,ID_JUNTA,TIPO,TAG,ID_LOTE,SEXO,NOM_CIRCUNSCRIPCION,DIGNIDAD,ID_DIGNIDAD "
+                                              +"FROM T_BASE WHERE TAG=?1"
+                                              );
+            
+            query.setParameter(1, tag);
+            return query.getResultList();
+
+        } catch (Exception ex) {
+            Logger.getLogger(TBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<Object[]>();
+        }
+    }
+    
+       
+/**
+     * Muestra los totales de la junta
+     * @param idParroquia
+     * @param idZona
+     * @param idJunta
+     * @return 
+     */
+    public BigDecimal generarTotalJunta(int idParroquia,int idZona,int idJunta) {
+        try {
+            Query query = em.createNativeQuery("SELECT COUNT(*) FROM T_BASE WHERE ID_PARROQUIA=?1 "
+                                              +"AND ID_ZONA=?2 AND ID_JUNTA=?3 AND TIPO='DOCUMENTO' "
+                                              );
+            
+            query.setParameter(1, idParroquia);
+            query.setParameter(2, idZona);
+            query.setParameter(3, idJunta);
+            return (BigDecimal) query.getSingleResult();
+
+        } catch (Exception ex) {
+           Logger.getLogger(TBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+                 return null;
+        }
+    }
+    
+        
+     /**
+     * Muestra los totales de las juntas de las etiquetas no empacadas
+     * @param idParroquia
+     * @param idZona
+     * @param idJunta
+     * @return 
+     */
+    public BigDecimal generarTotalJuntaNoEmpacados(int idParroquia,int idZona,int idJunta) {
+        try {
+            Query query = em.createNativeQuery("SELECT COUNT(*) FROM T_BASE WHERE ID_PARROQUIA=?1 "
+                                              +"AND ID_ZONA=?2 AND ID_JUNTA=?3 AND TIPO='PAPELETA'"
+                                              +"AND ID_LOTE IS NOT NULL "
+                                              );
+            
+            query.setParameter(1, idParroquia);
+            query.setParameter(2, idZona);
+            query.setParameter(3, idJunta);
+            return (BigDecimal) query.getSingleResult();
+
+        } catch (Exception ex) {
+           Logger.getLogger(TBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+                 //return new BigDecimal(BigDecimal.ZERO);
+        }
+        return null;
+    }
+   
+      /**
+     * Muestra los totales de las juntas de las etiquetas no empacadas
+     * @param tag
+     * @return 
+     */
+    public BigDecimal generarTotalJuntaNoEmpacadosTag(String tag) {
+        try {
+            Query query = em.createNativeQuery("SELECT COUNT(*) FROM T_BASE WHERE TIPO='DOCUMENTO'"
+                                              +" AND TAG=?1 AND ID_LOTE IS NOT NULL"
+                                              );
+            
+            query.setParameter(1, tag);
+            return (BigDecimal) query.getSingleResult();
+
+        } catch (Exception ex) {
+           Logger.getLogger(TBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+                 return null;
+        }
+    }
+    
+        /**
+     * Actualiza el registro correspondiente al tag leído
+     * @param estado
+     * @param idLote
+     * @param fechaPega
+     * @param usuarioPega
+     * @param tag 
+     */
+    public void actualizarEstadoTag(String estado,int idLote,Date fechaPega,String usuarioPega,String tag){
+        try{
+        em.getTransaction().begin();
+        Query query = em.createNativeQuery("UPDATE T_BASE SET ESTADO=?1,ID_LOTE=?2,FECHA_PEGA=?3"
+                    + ",USUARIO_PEGA=?4 WHERE TAG=?5 AND ID_LOTE IS NULL");
+            
+            query.setParameter(1, estado);
+            query.setParameter(2, idLote);
+            query.setParameter(3, fechaPega);
+            query.setParameter(4, usuarioPega);
+            query.setParameter(5, tag);
+            query.executeUpdate();
+            em.getTransaction().commit();
+             } catch (Exception ex) {
+            Logger.getLogger(TBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+            
+    }
+
+        
+    /**
+     * Muestra el listado de etiquetas leídas ordenados por fecha
+     * @param intidLote
+     * @param intidProvincia
+     * @param estado
+     * @return 
+     */
+    public List<Object[]> cargarDatosLoteFechaPega(int intidLote,int intidProvincia,String estado) {
+        try {
+            Query query = em.createNativeQuery("SELECT ID_JUNTA,PROVINCIA,CANTON,PARROQUIA,ID_ZONA,ZONA AS AGENCIA,SEXO,TAG,DIGNIDAD,NOM_CIRCUNSCRIPCION "
+                                              +"FROM T_BASE WHERE ESTADO=?1 AND ID_LOTE=?2 AND ID_PROVINCIA=?3 AND TIPO='DOCUMENTO' ORDER BY FECHA_PEGA DESC "
+                                              );
+            
+            query.setParameter(1, estado);
+            query.setParameter(2, intidLote);
+            query.setParameter(3, intidProvincia);
+            return query.getResultList();
+
+        } catch (Exception ex) {
+         Logger.getLogger(TBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<Object[]>();
+        }
+    }
+
+        /**
+     * Actualiza el estado a generada cuando se elimina un registro de la tabla de lotes
+     * @param estado
+     * @param tipo
+     * @param tag 
+     */
+    public void actualizarEstadoGeneradaDocumento(String estado,String tipo,String tag){
+        try{
+        int resultado;
+        em.getTransaction().begin();
+        Query query =em.createNativeQuery("UPDATE T_BASE SET ID_LOTE=NULL,ESTADO=?1 WHERE TAG=?3 AND TIPO=?2");
+        query.setParameter(1, estado);
+        query.setParameter(2, tipo);
+        query.setParameter(3, tag);
+          resultado=query.executeUpdate();
+            
+            em.getTransaction().commit();
+             } catch (Exception ex) {
+            Logger.getLogger(TBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+       
+    }
+    
+        /**
+     * Cierra el lote
+     * @param estado
+     * @param idLote
+     * @param fechaCierre
+     * @param usuarioCierre 
+     */
+    public void actualizarEstadoTagCerrado(String estado,int idLote,Date fechaCierre,String usuarioCierre,String tipo){
+        try{
+            int resultado;
+        em.getTransaction().begin();
+        Query query = em.createNativeQuery("UPDATE T_LOTE SET ESTADO=?1,FECHA_CIERRE=?3"
+                    + ",USUARIO_CIERRE=?4 WHERE ID_LOTE=?2 and TIPO=?5");
+            
+            query.setParameter(1, estado);
+            query.setParameter(2, idLote);
+            query.setParameter(3, fechaCierre);
+            query.setParameter(4, usuarioCierre);
+            query.setParameter(5, tipo);
+            resultado=query.executeUpdate();
+            
+            em.getTransaction().commit();
+             } catch (Exception ex) {
+            Logger.getLogger(TBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+            
+    }
+    
+         /**
+     * Carga los datos de los tags que ya fueron leídos por lote
+     * @param intidLote
+     * @param tipo
+     * @return 
+     */
+    public List<Object[]> cargarDatosLoteEmpacados(int intidLote,String tipo) {
+        try {
+            Query query = em.createNativeQuery("SELECT ID_JUNTA,PROVINCIA,CANTON,PARROQUIA,ID_ZONA,ZONA AS AGENCIA,SEXO,TAG,DIGNIDAD,NOM_CIRCUNSCRIPCION "
+                                              +"FROM T_BASE WHERE ID_LOTE=?1 AND TIPO=?2 ORDER BY FECHA_PEGA DESC "
+                                              );
+            
+            query.setParameter(1, intidLote);
+            query.setParameter(2, tipo);
+            return query.getResultList();
+
+        } catch (Exception ex) {
+         Logger.getLogger(TBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<Object[]>();
+        }
+    }
+    
+    
 }
