@@ -311,7 +311,7 @@ public class RFIDMainDlg extends javax.swing.JFrame{
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("J_RFIDHostSample");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusTraversalPolicyProvider(true);
@@ -636,7 +636,7 @@ public class RFIDMainDlg extends javax.swing.JFrame{
                                 .addComponent(jtxtCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(488, 488, 488)
                                 .addComponent(jbtnCerrarLote)))
-                        .addGap(0, 777, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

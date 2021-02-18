@@ -8,6 +8,7 @@ package ec.gob.igm.cne.vista;
 import ec.gob.igm.cne.entidades.TUsuario;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import zebra.RFIDMainDlg;
 
 /**
  * Controlador del Menu Principal
@@ -71,7 +72,9 @@ public class CMenu implements IMenu
 
     @Override
     public void lotesDocumentos() {
-        FrmLoteDocumentos frmLoteDocumentos = new FrmLoteDocumentos(ventana, true);
+        //FrmLoteDocumentos frmLoteDocumentos = new FrmLoteDocumentos(ventana, true);
+        RFIDMainDlg frmLoteDocumentos = new RFIDMainDlg();
+        
         frmLoteDocumentos.setTitle("Lote de Documentos");
         frmLoteDocumentos.setLocationRelativeTo(ventana);
         frmLoteDocumentos.setVisible(true);

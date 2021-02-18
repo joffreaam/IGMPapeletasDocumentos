@@ -91,23 +91,23 @@ public class TUsuarioJpaController implements Serializable {
             TDignidadXUsuarioListNew = attachedTDignidadXUsuarioListNew;
             TUsuario.setTDignidadXUsuarioList(TDignidadXUsuarioListNew);
             TUsuario = em.merge(TUsuario);
-            for (TDignidadXUsuario TDignidadXUsuarioListOldTDignidadXUsuario : TDignidadXUsuarioListOld) {
-                if (!TDignidadXUsuarioListNew.contains(TDignidadXUsuarioListOldTDignidadXUsuario)) {
-                    TDignidadXUsuarioListOldTDignidadXUsuario.setIdUsuario(null);
-                    TDignidadXUsuarioListOldTDignidadXUsuario = em.merge(TDignidadXUsuarioListOldTDignidadXUsuario);
-                }
-            }
-            for (TDignidadXUsuario TDignidadXUsuarioListNewTDignidadXUsuario : TDignidadXUsuarioListNew) {
-                if (!TDignidadXUsuarioListOld.contains(TDignidadXUsuarioListNewTDignidadXUsuario)) {
-                    TUsuario oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario = TDignidadXUsuarioListNewTDignidadXUsuario.getIdUsuario();
-                    TDignidadXUsuarioListNewTDignidadXUsuario.setIdUsuario(TUsuario);
-                    TDignidadXUsuarioListNewTDignidadXUsuario = em.merge(TDignidadXUsuarioListNewTDignidadXUsuario);
-                    if (oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario != null && !oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario.equals(TUsuario)) {
-                        oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario.getTDignidadXUsuarioList().remove(TDignidadXUsuarioListNewTDignidadXUsuario);
-                        oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario = em.merge(oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario);
-                    }
-                }
-            }
+//            for (TDignidadXUsuario TDignidadXUsuarioListOldTDignidadXUsuario : TDignidadXUsuarioListOld) {
+//                if (!TDignidadXUsuarioListNew.contains(TDignidadXUsuarioListOldTDignidadXUsuario)) {
+//                    TDignidadXUsuarioListOldTDignidadXUsuario.setIdUsuario(null);
+//                    TDignidadXUsuarioListOldTDignidadXUsuario = em.merge(TDignidadXUsuarioListOldTDignidadXUsuario);
+//                }
+//            }
+//            for (TDignidadXUsuario TDignidadXUsuarioListNewTDignidadXUsuario : TDignidadXUsuarioListNew) {
+//                if (!TDignidadXUsuarioListOld.contains(TDignidadXUsuarioListNewTDignidadXUsuario)) {
+//                    TUsuario oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario = TDignidadXUsuarioListNewTDignidadXUsuario.getIdUsuario();
+//                    TDignidadXUsuarioListNewTDignidadXUsuario.setIdUsuario(TUsuario);
+//                    TDignidadXUsuarioListNewTDignidadXUsuario = em.merge(TDignidadXUsuarioListNewTDignidadXUsuario);
+//                    if (oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario != null && !oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario.equals(TUsuario)) {
+//                        oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario.getTDignidadXUsuarioList().remove(TDignidadXUsuarioListNewTDignidadXUsuario);
+//                        oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario = em.merge(oldIdUsuarioOfTDignidadXUsuarioListNewTDignidadXUsuario);
+//                    }
+//                }
+//            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
