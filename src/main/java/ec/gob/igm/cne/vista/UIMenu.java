@@ -44,12 +44,13 @@ public class UIMenu extends javax.swing.JFrame
         jPanel4 = new javax.swing.JPanel();
         btnActasD = new javax.swing.JButton();
         btnActasP = new javax.swing.JButton();
-        label1 = new java.awt.Label();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        lblPermisos = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itmConfig = new javax.swing.JMenuItem();
@@ -67,8 +68,10 @@ public class UIMenu extends javax.swing.JFrame
                 formWindowClosing(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.setOpaque(false);
 
         btnEtiquetasP.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         btnEtiquetasP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/papeleta.png"))); // NOI18N
@@ -95,9 +98,9 @@ public class UIMenu extends javax.swing.JFrame
             }
         });
 
-        btnREtiquetasD.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        btnREtiquetasD.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnREtiquetasD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tag.png"))); // NOI18N
-        btnREtiquetasD.setText("REIMPRESION E. DOCUMENTOS");
+        btnREtiquetasD.setText("REIMPRESION ETIQUETAS");
         btnREtiquetasD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnREtiquetasDActionPerformed(evt);
@@ -115,9 +118,9 @@ public class UIMenu extends javax.swing.JFrame
             }
         });
 
-        btnEtiquetasD.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        btnEtiquetasD.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnEtiquetasD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/documento_35px.png"))); // NOI18N
-        btnEtiquetasD.setText("ETIQUETAS DOCUMENTOS");
+        btnEtiquetasD.setText("GENERACION ETIQUETAS");
         btnEtiquetasD.setName("btnGeneraDocumentos"); // NOI18N
         btnEtiquetasD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,9 +128,9 @@ public class UIMenu extends javax.swing.JFrame
             }
         });
 
-        btnLoteD.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        btnLoteD.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnLoteD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/producto.png"))); // NOI18N
-        btnLoteD.setText("LOTE DOCUMENTOS");
+        btnLoteD.setText("GENERACION LOTES");
         btnLoteD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoteDActionPerformed(evt);
@@ -150,9 +153,9 @@ public class UIMenu extends javax.swing.JFrame
                         .addComponent(btnEtiquetasD, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLoteD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnREtiquetasD, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLoteD, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                            .addComponent(btnREtiquetasD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(0, 116, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,11 +178,17 @@ public class UIMenu extends javax.swing.JFrame
                 .addGap(21, 21, 21))
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultas"));
+        jPanel4.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.disabledShadow"));
+        jPanel4.setToolTipText("");
+        jPanel4.setOpaque(false);
 
         btnActasD.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnActasD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/documento_24px.png"))); // NOI18N
-        btnActasD.setText("ACTAS DOCUMENTOS");
+        btnActasD.setText("IMPRESION DE ACTAS");
+        btnActasD.setToolTipText("");
         btnActasD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActasDActionPerformed(evt);
@@ -197,8 +206,13 @@ public class UIMenu extends javax.swing.JFrame
             }
         });
 
-        label1.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
-        label1.setText("CopyRight IGM 2021.02.18 V1.4.033 GitHub");
+        txtNombre.setEditable(false);
+        txtNombre.setColumns(20);
+        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        txtNombre.setOpaque(false);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setText("Bienvenido(a):");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -207,68 +221,62 @@ public class UIMenu extends javax.swing.JFrame
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnActasP, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                    .addComponent(btnActasD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnActasP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnActasD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(0, 8, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addComponent(btnActasP, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnActasD, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, -1, 260));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("Bienvenido(a):");
-
-        txtNombre.setEditable(false);
-        txtNombre.setColumns(20);
-
-        lblPermisos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblPermisos.setForeground(new java.awt.Color(102, 102, 102));
-        lblPermisos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblPermisos.setText(" ");
+        jPanel2.setOpaque(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(132, 132, 132)
-                                .addComponent(lblPermisos, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)))
+            .addGap(0, 230, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblPermisos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 82, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 230, -1));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo2.jpeg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, 350, 60));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setText("DOCUMENTOS ELECTORALES");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 310, -1));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("CopyRight IGM 2021.02.18 V1.4.033 GitHub");
+        jLabel5.setToolTipText("");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 400, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\temp\\CNE.jpg")); // NOI18N
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 470));
 
         jMenu1.setText("Archivo");
 
@@ -319,37 +327,6 @@ public class UIMenu extends javax.swing.JFrame
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -373,16 +350,6 @@ public class UIMenu extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnLotePActionPerformed
         interfaz.lotesPapeletas();
     }//GEN-LAST:event_btnLotePActionPerformed
-
-    private void btnActasPActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnActasPActionPerformed
-    {//GEN-HEADEREND:event_btnActasPActionPerformed
-        interfaz.actasPapeletas();
-    }//GEN-LAST:event_btnActasPActionPerformed
-
-    private void btnActasDActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnActasDActionPerformed
-    {//GEN-HEADEREND:event_btnActasDActionPerformed
-        interfaz.actasDocumentos();
-    }//GEN-LAST:event_btnActasDActionPerformed
 
     private void itmCerrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itmCerrarActionPerformed
     {//GEN-HEADEREND:event_itmCerrarActionPerformed
@@ -422,6 +389,14 @@ public class UIMenu extends javax.swing.JFrame
         frmAdminUsuarios.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_itmAdminUsuariosActionPerformed
 
+    private void btnActasPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActasPActionPerformed
+        interfaz.actasPapeletas();
+    }//GEN-LAST:event_btnActasPActionPerformed
+
+    private void btnActasDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActasDActionPerformed
+        interfaz.actasDocumentos();
+    }//GEN-LAST:event_btnActasDActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActasD;
     private javax.swing.JButton btnActasP;
@@ -438,6 +413,9 @@ public class UIMenu extends javax.swing.JFrame
     private javax.swing.JMenuItem itmManual;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -445,8 +423,6 @@ public class UIMenu extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private java.awt.Label label1;
-    private javax.swing.JLabel lblPermisos;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
